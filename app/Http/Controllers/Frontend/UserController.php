@@ -10,7 +10,7 @@ use App\Post;
 class UserController extends Controller
 {
     public function index(){
-        $posts = Post::where('status', '=', 1)->paginate(5);
+        $posts = Post::where('status', '=', 1)->orderBy('id','desc')->paginate(5);
         return view('Frontend.index', ['posts' => $posts]);
     }
 
