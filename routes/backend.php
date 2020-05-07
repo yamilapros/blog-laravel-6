@@ -7,6 +7,7 @@ Route::get('/myadmin', 'AdminController@index')->name('admin.index');
 Route::get('/myadmin/post/index', 'PostController@index')->name('post.index');
 Route::get('/myadmin/post/create', 'PostController@create')->name('post.create');
 Route::post('/myadmin/post/save', 'PostController@save')->name('post.save');
+Route::get('/image/{filename}', 'PostController@getImage')->name('post.image');
 Route::get('/myadmin/post/edit/{id}', 'PostController@edit')->name('post.edit');
 Route::post('/myadmin/post/update/{id}', 'PostController@update')->name('post.update');
 Route::get('/myadmin/post/delete/{id}', 'PostController@delete')->name('post.delete');

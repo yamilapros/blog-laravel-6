@@ -20,6 +20,8 @@
 
   <!-- Custom styles for this template -->
   <link href="{{asset('blog/css/clean-blog.min.css')}}" rel="stylesheet">
+  <!-- Link for prism CSS for view of code -->
+  <link href="{{asset('blog/css/prism.css')}}" rel="stylesheet">
 
 </head>
 
@@ -38,8 +40,9 @@
   <script src="{{asset('blog/vendor/bootstrap/js/bootstrap.bundle.min.js')}}""></script>
 
   <!-- Custom scripts for this template -->
-  <script src="{{asset('blog/js/clean-blog.min.js')}}""></script>
-
+  <script src="{{asset('blog/js/clean-blog.min.js')}}"></script>
+  <!-- Link for prism JS for view of code -->
+  <script src="{{asset('blog/js/prism.js')}}"></script>
 </body>
 
 </html>

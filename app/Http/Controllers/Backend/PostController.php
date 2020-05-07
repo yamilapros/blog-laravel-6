@@ -4,6 +4,11 @@ namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+
+//Storage y File son de la misma carpeta
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\File;
 
 use App\Post;
 use App\Category;
@@ -29,6 +34,7 @@ class PostController extends Controller
             'subtitle' => 'required|string',
             'slug' => 'required|string',
             'body' => 'required|string',
+            'image' => 'image'
         ]);
 
         $post = new Post();
@@ -45,6 +51,18 @@ class PostController extends Controller
         $post->body = $body;
         $post->status = $status;
 
+        //Image
+        //Imagen
+        $image = $request->file('image');
+        if($image){
+            //Nombro
+            $image_path_name = time().$image->getClientOriginalName();
+            //Guardo
+            Storage::disk('public')->put($image_path_name, File::get($image));
+            //La meto en la tabla
+            $post->image = $image_path_name;
+        }
+
         $post->save();
 
         //For save is after of save
@@ -52,6 +70,11 @@ class PostController extends Controller
         $post->categories()->sync($request->categories);
 
         return redirect()->route('post.index')->with(['message' => 'The post has been created !']);
+    }
+
+    public function getImage($filename){
+        $file = Storage::disk('public')->get($filename);
+        return new Response($file, 200);
     }
 
     public function edit($id){
